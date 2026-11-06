@@ -1,0 +1,271 @@
+From 70eb3f43c0fcd1e886db9b95a65a3fbc09165af9 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 6 Nov 2026 12:12:51 +0300
+Subject: [PATCH 1/2] =?UTF-8?q?=D0=A0=D0=B5=D1=82=D1=80=D0=BE-VHS:=20?=
+ =?UTF-8?q?=D1=82=D1=91=D0=BC=D0=BD=D0=BE-=D0=BA=D0=BE=D1=80=D0=B8=D1=87?=
+ =?UTF-8?q?=D0=BD=D0=B5=D0=B2=D0=B0=D1=8F=20=D1=82=D0=B5=D0=BC=D0=B0=20?=
+ =?UTF-8?q?=D1=81=20=D0=BE=D1=80=D0=B0=D0=BD=D0=B6=D0=B5=D0=B2=D1=8B=D0=BC?=
+ =?UTF-8?q?=D0=B8=20=D0=B0=D0=BA=D1=86=D0=B5=D0=BD=D1=82=D0=B0=D0=BC=D0=B8?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Что меняет: тёмно-коричневый фон, оранжево-жёлтые акценты, острые
+углы, заголовки капсом и моноширинный шрифт Courier New (системный,
+без загрузки). Поверх страницы идут строки-сканлайны, как на старом
+видеомагнитофоне.
+
+Файлы: css/theme-retro.css (новый), index.html (строка подключения).
+Отключить: удалить строку со ссылкой на theme-retro.css.
+Не совмещать с css/theme-light.css: обе меняют тему.
+
+Co-Authored-By: Claude Haiku 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Wcewyhs3vNftb9ZrFYcmut
+---
+ css/theme-retro.css | 73 +++++++++++++++++++++++++++++++++++++++++++++
+ index.html          |  1 +
+ 2 files changed, 74 insertions(+)
+ create mode 100644 css/theme-retro.css
+
+diff --git a/css/theme-retro.css b/css/theme-retro.css
+new file mode 100644
+index 0000000..97099ac
+--- /dev/null
++++ b/css/theme-retro.css
+@@ -0,0 +1,73 @@
++/* =========================================================
++   Ретро-VHS: тёмно-коричневая тема, оранжевые акценты,
++   моноширинный шрифт и строки-сканлайны.
++   Подключено в index.html после modals.css.
++   Не совмещать с css/theme-light.css: обе меняют тему.
++   ========================================================= */
++
++
++:root {
++  --bg: #0d0a08;
++  --surface: rgba(255, 170, 60, 0.06);
++  --surface-strong: rgba(255, 170, 60, 0.12);
++  --border: rgba(255, 170, 60, 0.25);
++  --border-strong: rgba(255, 170, 60, 0.50);
++  --text: #ffe9c7;
++  --muted: #d6a86a;
++  --accent-1: #ff7a1a;
++  --accent-2: #ffd23f;
++  --glow: 0 0 18px rgba(255, 122, 26, .55), 0 0 40px rgba(255, 210, 63, .25);
++  --font-body: "Courier New", Consolas, monospace;
++  --font-display: "Courier New", Consolas, monospace;
++  --radius: 6px;
++  --radius-sm: 3px;
++}
++
++body {
++  background-color: var(--bg);
++  background-image: none;
++  letter-spacing: .02em;
++}
++
++/* Строки-сканлайны поверх всей страницы */
++body::after {
++  content: "";
++  position: fixed;
++  inset: 0;
++  pointer-events: none;
++  z-index: 999;
++  background: repeating-linear-gradient(
++    to bottom,
++    rgba(0, 0, 0, 0) 0,
++    rgba(0, 0, 0, 0) 2px,
++    rgba(0, 0, 0, .22) 3px,
++    rgba(0, 0, 0, 0) 4px
++  );
++}
++
++h1, h2, h3 { text-transform: uppercase; letter-spacing: .04em; }
++.eyebrow { color: #ffd23f; }
++
++/* Кнопки: квадратные углы и капс */
++.btn { border-radius: 4px; text-transform: uppercase; letter-spacing: .08em; font-size: .9rem; }
++.btn-primary { color: #1a0f05; }
++.btn-sm { padding: 8px 14px; }
++
++/* Блоки и карточки: меньше скругления, без стекла */
++.glass { border-radius: var(--radius); background: rgba(255, 170, 60, .04); backdrop-filter: none; -webkit-backdrop-filter: none; }
++.layer, .poster, .card-fav, .rate, .tag, .badge { border-radius: var(--radius-sm); }
++.poster { box-shadow: 0 0 0 1px rgba(255, 170, 60, .35), 0 8px 20px rgba(0, 0, 0, .6); }
++.layer { border-radius: 4px; }
++
++/* Шапка, окна, уведомления */
++.site-header.is-scrolled { background: rgba(13, 10, 8, .92); }
++.mobile-menu { background: rgba(13, 10, 8, .97); }
++.modal-backdrop { background: rgba(0, 0, 0, .75); backdrop-filter: none; -webkit-backdrop-filter: none; }
++.modal-panel, .account-menu { background: #120d09; border-radius: var(--radius); }
++.toast { background: #1a120b; border-radius: var(--radius-sm); }
++
++/* Поля ввода */
++input[type="text"], input[type="email"], input[type="password"], input[type="search"] {
++  border-radius: var(--radius-sm);
++  background: #1a120b;
++}
+diff --git a/index.html b/index.html
+index 491fd75..b182cf6 100644
+--- a/index.html
++++ b/index.html
+@@ -12,6 +12,7 @@
+ <link rel="stylesheet" href="css/base.css">
+ <link rel="stylesheet" href="css/sections.css">
+ <link rel="stylesheet" href="css/modals.css">
++<link rel="stylesheet" href="css/theme-retro.css">
+ </head>
+ <body>
+ 
+-- 
+2.43.0
+
+
+From 0e3c698853dbc08b328fc1260ffa45abf648f060 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 6 Nov 2026 12:12:51 +0300
+Subject: [PATCH 2/2] =?UTF-8?q?=D0=A1=D0=BB=D1=83=D1=87=D0=B0=D0=B9=D0=BD?=
+ =?UTF-8?q?=D1=8B=D0=B9=20=D1=84=D0=B8=D0=BB=D1=8C=D0=BC:=20=D0=BA=D0=BD?=
+ =?UTF-8?q?=D0=BE=D0=BF=D0=BA=D0=B0=20=D0=B2=D1=8B=D0=B1=D0=BE=D1=80=D0=B0?=
+ =?UTF-8?q?=20=D1=82=D0=B0=D0=B9=D1=82=D0=BB=D0=B0=20=D0=B2=20=D0=BA=D0=B0?=
+ =?UTF-8?q?=D1=82=D0=B0=D0=BB=D0=BE=D0=B3=D0=B5?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Что добавляет: кнопку «Случайный фильм» над результатами каталога.
+Выбирает случайный тайтл из тех, что видны при текущих фильтрах.
+Название несколько секунд «крутится» и замедляется, затем открывается
+карточка фильма.
+
+Файлы: js/random-movie.js (новый), index.html (строка подключения после plans.js).
+Отключить: удалить строку со скриптом random-movie.js.
+
+Co-Authored-By: Claude Haiku 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Wcewyhs3vNftb9ZrFYcmut
+---
+ index.html         |  1 +
+ js/random-movie.js | 99 ++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 100 insertions(+)
+ create mode 100644 js/random-movie.js
+
+diff --git a/index.html b/index.html
+index b182cf6..3c1c615 100644
+--- a/index.html
++++ b/index.html
+@@ -658,5 +658,6 @@
+ <script src="js/catalog.js"></script>
+ <script src="js/auth.js"></script>
+ <script src="js/plans.js"></script>
++<script src="js/random-movie.js"></script>
+ </body>
+ </html>
+diff --git a/js/random-movie.js b/js/random-movie.js
+new file mode 100644
+index 0000000..3b59d3b
+--- /dev/null
++++ b/js/random-movie.js
+@@ -0,0 +1,99 @@
++/* =========================================================
++   Случайный фильм: кнопка над каталогом.
++   Выбирает тайтл из видимых при текущих фильтрах.
++   Подключено в index.html после plans.js.
++   ========================================================= */
++
++(function () {
++  "use strict";
++
++  const SV = window.SV;
++  if (!SV || !SV.catalog) return;
++
++  const style = document.createElement("style");
++  style.textContent = `
++    .rnd-btn {
++      display: inline-flex;
++      align-items: center;
++      gap: 10px;
++      margin: 0 0 18px;
++      padding: 12px 22px;
++      border: 0;
++      border-radius: 999px;
++      font: inherit;
++      font-weight: 600;
++      color: #fff;
++      background: var(--accent-grad);
++      box-shadow: var(--glow);
++      cursor: pointer;
++      transition: transform .25s ease;
++    }
++    .rnd-btn:hover:not(:disabled) { transform: translateY(-2px) scale(1.03); }
++    .rnd-btn:disabled { cursor: progress; opacity: .85; }
++    .rnd-btn svg { width: 20px; height: 20px; flex: none; }
++    .rnd-btn.is-spinning svg { animation: rnd-spin .7s linear infinite; }
++    .rnd-label { min-width: 12ch; text-align: left; }
++    @keyframes rnd-spin { to { transform: rotate(360deg); } }
++  `;
++  document.head.appendChild(style);
++
++  const btn = document.createElement("button");
++  btn.type = "button";
++  btn.className = "rnd-btn";
++  btn.innerHTML =
++    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
++    '<rect x="3" y="3" width="18" height="18" rx="3"/>' +
++    '<circle cx="8" cy="8" r="1.4" fill="currentColor"/>' +
++    '<circle cx="12" cy="12" r="1.4" fill="currentColor"/>' +
++    '<circle cx="16" cy="16" r="1.4" fill="currentColor"/>' +
++    "</svg>" +
++    '<span class="rnd-label">Случайный фильм</span>';
++
++  const anchor = document.querySelector(".catalog-meta");
++  if (anchor) anchor.parentNode.insertBefore(btn, anchor);
++
++  const label = btn.querySelector(".rnd-label");
++  const defaultText = label.textContent;
++  let busy = false;
++
++  // ID тайтлов, которые сейчас видны в каталоге
++  const visibleIds = () =>
++    Array.from(document.querySelectorAll("#catalog-grid [data-open]")).map((el) => el.dataset.open);
++
++  btn.addEventListener("click", () => {
++    if (busy) return;
++    const ids = visibleIds();
++    if (!ids.length) {
++      SV.ui.toast("Под текущие фильтры ничего не подходит.", "error");
++      return;
++    }
++
++    const pick = ids[Math.floor(Math.random() * ids.length)];
++    busy = true;
++    btn.disabled = true;
++    btn.classList.add("is-spinning");
++
++    // «Крутим» названия и постепенно замедляем
++    let step = 0;
++    const total = 12;
++    const spin = () => {
++      const t = SV.catalog.byId(ids[Math.floor(Math.random() * ids.length)]);
++      label.textContent = t ? t.title : "...";
++      step++;
++      if (step < total) {
++        setTimeout(spin, 50 + step * step * 3);
++        return;
++      }
++      const chosen = SV.catalog.byId(pick);
++      label.textContent = chosen ? chosen.title : defaultText;
++      setTimeout(() => {
++        SV.catalog.openTitle(pick);
++        label.textContent = defaultText;
++        btn.classList.remove("is-spinning");
++        btn.disabled = false;
++        busy = false;
++      }, 500);
++    };
++    spin();
++  });
++})();
+-- 
+2.43.0
+
