@@ -1,0 +1,270 @@
+From db967571762ea74b335c477af564a825759467a8 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 6 Nov 2026 12:12:51 +0300
+Subject: [PATCH 1/2] =?UTF-8?q?=D0=A1=D0=B2=D0=B5=D1=82=D0=BB=D0=B0=D1=8F?=
+ =?UTF-8?q?=20=D1=82=D0=B5=D0=BC=D0=B0:=20=D0=B0=D0=BB=D1=8C=D1=82=D0=B5?=
+ =?UTF-8?q?=D1=80=D0=BD=D0=B0=D1=82=D0=B8=D0=B2=D0=BD=D0=BE=D0=B5=20=D0=BE?=
+ =?UTF-8?q?=D1=84=D0=BE=D1=80=D0=BC=D0=BB=D0=B5=D0=BD=D0=B8=D0=B5=20=D1=81?=
+ =?UTF-8?q?=D0=B0=D0=B9=D1=82=D0=B0?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Что меняет: тёмный фон заменён на светлый лавандовый. Карточки,
+окна, меню и поля ввода стали белыми, текстовые акценты фиолетовые.
+Разметка и JavaScript не меняются, только цвета и тени.
+
+Файлы: css/theme-light.css (новый), index.html (строка подключения).
+Отключить: удалить строку со ссылкой на theme-light.css.
+Не совмещать с css/theme-retro.css: обе меняют тему.
+
+Co-Authored-By: Claude Haiku 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Wcewyhs3vNftb9ZrFYcmut
+---
+ css/theme-light.css | 70 +++++++++++++++++++++++++++++++++++++++++++++
+ index.html          |  1 +
+ 2 files changed, 71 insertions(+)
+ create mode 100644 css/theme-light.css
+
+diff --git a/css/theme-light.css b/css/theme-light.css
+new file mode 100644
+index 0000000..cd01ed2
+--- /dev/null
++++ b/css/theme-light.css
+@@ -0,0 +1,70 @@
++/* =========================================================
++   Светлая тема (альтернативное оформление)
++   Подключено в index.html после modals.css.
++   Не совмещать с css/theme-retro.css: обе меняют тему.
++   ========================================================= */
++
++
++:root {
++  --bg: #f5f4ff;
++  --bg-2: #ffffff;
++  --surface: rgba(30, 27, 75, 0.04);
++  --surface-strong: rgba(30, 27, 75, 0.08);
++  --border: rgba(30, 27, 75, 0.10);
++  --border-strong: rgba(30, 27, 75, 0.20);
++  --text: #1e1b4b;
++  --muted: #5b5f85;
++  --star: #f59e0b;
++  --success: #059669;
++  --danger: #dc2626;
++  --glow: 0 0 22px rgba(139, 92, 246, 0.28), 0 0 40px rgba(236, 72, 153, 0.14);
++  --shadow-1: 0 1px 2px rgba(30, 27, 75, .06), 0 4px 8px rgba(30, 27, 75, .06);
++  --shadow-2: 0 2px 4px rgba(30, 27, 75, .06), 0 8px 16px rgba(30, 27, 75, .08), 0 20px 40px rgba(30, 27, 75, .08);
++  --shadow-3: 0 4px 8px rgba(30, 27, 75, .08), 0 16px 32px rgba(30, 27, 75, .10), 0 36px 72px rgba(30, 27, 75, .14);
++}
++
++body {
++  background-color: var(--bg);
++  background-image:
++    radial-gradient(900px 600px at 10% -10%, rgba(139, 92, 246, 0.12), transparent 60%),
++    radial-gradient(800px 600px at 110% 20%, rgba(236, 72, 153, 0.08), transparent 60%);
++}
++
++/* Шапка и меню */
++.site-header.is-scrolled { background: rgba(245, 244, 255, 0.85); box-shadow: 0 10px 30px rgba(30, 27, 75, .08); }
++.mobile-menu { background: rgba(245, 244, 255, 0.96); }
++.btn-ghost, .btn-icon, .toggle, .account-btn { background: rgba(255, 255, 255, 0.85); }
++.btn-ghost:hover:not(:disabled) { background: #fff; }
++
++/* Акценты текста */
++.eyebrow, .row-head a, .btn-link { color: #7c3aed; }
++.hero-copy .eyebrow { background: #fff; }
++.save-tag { color: var(--success); background: rgba(5, 150, 105, .12); }
++.plan li svg { stroke: var(--success); }
++
++/* Карточки и блоки */
++.glass { background: linear-gradient(180deg, #ffffff, #f7f6ff); }
++.plan.is-featured { background: linear-gradient(180deg, rgba(139, 92, 246, .10), rgba(236, 72, 153, .03) 60%, #fff); }
++.cta {
++  background:
++    radial-gradient(600px 300px at 0% 0%, rgba(139, 92, 246, .22), transparent 70%),
++    radial-gradient(600px 300px at 100% 100%, rgba(236, 72, 153, .2), transparent 70%),
++    #ffffff;
++}
++.cta p { color: var(--muted); }
++.site-footer { background: linear-gradient(180deg, transparent, rgba(30, 27, 75, .04)); }
++
++/* Окна и уведомления */
++.modal-backdrop { background: rgba(30, 27, 75, 0.35); }
++.modal-panel, .account-menu, .toast { background: #ffffff; }
++
++/* Поля ввода и элементы форм */
++input[type="text"], input[type="email"], input[type="password"], input[type="search"] { background: #ffffff; }
++select { background-color: #ffffff; }
++select option { background: #ffffff; color: var(--text); }
++.checkbox input[type="checkbox"] { background: #ffffff; }
++.pw-meter { background: rgba(30, 27, 75, .10); }
++input[type="range"] {
++  background: linear-gradient(90deg, var(--accent-1), var(--accent-2)) 0 / var(--fill, 0%) 100% no-repeat,
++    rgba(30, 27, 75, .12);
++}
+diff --git a/index.html b/index.html
+index 491fd75..ceb035c 100644
+--- a/index.html
++++ b/index.html
+@@ -12,6 +12,7 @@
+ <link rel="stylesheet" href="css/base.css">
+ <link rel="stylesheet" href="css/sections.css">
+ <link rel="stylesheet" href="css/modals.css">
++<link rel="stylesheet" href="css/theme-light.css">
+ </head>
+ <body>
+ 
+-- 
+2.43.0
+
+
+From 63f7387a46184e10f66e9c0c84a572e9ce2f3f00 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 6 Nov 2026 12:12:51 +0300
+Subject: [PATCH 2/2] =?UTF-8?q?=D0=9D=D0=B0=D1=81=D1=82=D1=80=D0=BE=D0=B5?=
+ =?UTF-8?q?=D0=BD=D0=B8=D0=B5=20=D1=81=D0=B5=D0=B3=D0=BE=D0=B4=D0=BD=D1=8F?=
+ =?UTF-8?q?:=20=D1=86=D0=B2=D0=B5=D1=82=D0=B0=20=D0=B0=D0=BA=D1=86=D0=B5?=
+ =?UTF-8?q?=D0=BD=D1=82=D0=BE=D0=B2=20=D0=B8=20=D0=BF=D0=BE=D0=B4=D0=B1?=
+ =?UTF-8?q?=D0=BE=D1=80=D0=BA=D0=B0=20=D0=B6=D0=B0=D0=BD=D1=80=D0=B0?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Что добавляет: строку «Настроение сегодня» под описанием в hero.
+Три варианта: Весело (оранжевый, комедии), Напряжённо (синий,
+триллеры), Вдохновляюще (зелёный, фантастика). Выбор меняет цвета
+акцентов на всём сайте и открывает каталог с нужным жанром.
+Повторный клик выключает настроение. Выбор запоминается в браузере.
+
+Файлы: js/mood.js (новый), index.html (строка подключения после plans.js).
+Отключить: удалить строку со скриптом mood.js.
+Заметка: пока настроение выбрано, оно перекрывает цвета темы.
+
+Co-Authored-By: Claude Haiku 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Wcewyhs3vNftb9ZrFYcmut
+---
+ index.html |   1 +
+ js/mood.js | 100 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 101 insertions(+)
+ create mode 100644 js/mood.js
+
+diff --git a/index.html b/index.html
+index ceb035c..5a6f9a3 100644
+--- a/index.html
++++ b/index.html
+@@ -658,5 +658,6 @@
+ <script src="js/catalog.js"></script>
+ <script src="js/auth.js"></script>
+ <script src="js/plans.js"></script>
++<script src="js/mood.js"></script>
+ </body>
+ </html>
+diff --git a/js/mood.js b/js/mood.js
+new file mode 100644
+index 0000000..e445ed9
+--- /dev/null
++++ b/js/mood.js
+@@ -0,0 +1,100 @@
++/* =========================================================
++   Настроение сегодня: цвета акцентов и подборка жанра
++   Подключено в index.html после plans.js.
++   ========================================================= */
++
++(function () {
++  "use strict";
++
++  const SV = window.SV;
++  if (!SV || !SV.catalog) return;
++
++  const KEY = "sv_mood";
++  const MOODS = {
++    fun:      { label: "Весело",       from: "#f59e0b", to: "#ef4444", genre: "Комедия" },
++    tense:    { label: "Напряжённо",   from: "#0ea5e9", to: "#6d28d9", genre: "Триллер" },
++    inspired: { label: "Вдохновляюще", from: "#22c55e", to: "#06b6d4", genre: "Фантастика" }
++  };
++
++  const style = document.createElement("style");
++  style.textContent = `
++    .mood { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 22px; }
++    .mood-label { font-size: .9rem; color: var(--muted); margin-right: 4px; }
++    .mood button {
++      font: inherit;
++      font-size: .88rem;
++      font-weight: 600;
++      padding: 7px 14px;
++      border-radius: 999px;
++      border: 1px solid var(--border);
++      background: var(--surface);
++      color: var(--text);
++      cursor: pointer;
++      transition: transform .2s ease, background-color .2s ease;
++    }
++    .mood button:hover { transform: translateY(-1px); background: var(--surface-strong); }
++    .mood button[aria-pressed="true"] {
++      color: #fff;
++      background: var(--accent-grad);
++      border-color: transparent;
++      box-shadow: var(--glow);
++    }
++  `;
++  document.head.appendChild(style);
++
++  // «#rrggbb» -> «rgba(r, g, b, a)»
++  const rgba = (hex, a) => {
++    const n = parseInt(hex.slice(1), 16);
++    return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
++  };
++
++  function applyColors(m) {
++    const root = document.documentElement.style;
++    if (!m) {
++      ["--accent-1", "--accent-2", "--glow"].forEach((p) => root.removeProperty(p));
++      return;
++    }
++    root.setProperty("--accent-1", m.from);
++    root.setProperty("--accent-2", m.to);
++    root.setProperty("--glow", `0 0 24px ${rgba(m.from, 0.45)}, 0 0 48px ${rgba(m.to, 0.25)}`);
++  }
++
++  function setMood(key, { filter = true } = {}) {
++    const m = MOODS[key] || null;
++    applyColors(m);
++    box.querySelectorAll("[data-mood]").forEach((b) =>
++      b.setAttribute("aria-pressed", String(b.dataset.mood === key))
++    );
++    try {
++      if (m) localStorage.setItem(KEY, key);
++      else localStorage.removeItem(KEY);
++    } catch (e) { /* хранилище недоступно: просто не запоминаем */ }
++    if (m && filter) SV.catalog.quickFilter({ genre: m.genre });
++  }
++
++  // Блок с кнопками: в конец текстовой части hero
++  const box = document.createElement("div");
++  box.className = "mood";
++  box.setAttribute("role", "group");
++  box.setAttribute("aria-label", "Настроение сегодня");
++  box.innerHTML =
++    '<span class="mood-label">Настроение сегодня:</span>' +
++    Object.entries(MOODS)
++      .map(([key, m]) => `<button type="button" data-mood="${key}" aria-pressed="false">${m.label}</button>`)
++      .join("");
++
++  const copy = document.querySelector(".hero-copy");
++  if (copy) copy.appendChild(box);
++
++  box.addEventListener("click", (e) => {
++    const b = e.target.closest("[data-mood]");
++    if (!b) return;
++    if (b.getAttribute("aria-pressed") === "true") setMood(null);
++    else setMood(b.dataset.mood);
++  });
++
++  // Восстанавливаем выбор без прокрутки страницы
++  let saved = null;
++  try { saved = localStorage.getItem(KEY); } catch (e) { /* ignore */ }
++  if (saved && MOODS[saved]) setMood(saved, { filter: false });
++})();
+-- 
+2.43.0
+
